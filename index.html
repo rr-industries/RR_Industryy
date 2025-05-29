@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RR Industries | Professional Website Development</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            background-color: white;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 80px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            transform: translateY(-150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .feature-icon {
+            background-color: rgba(37, 99, 235, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h4 {
+            margin-bottom: 5px;
+        }
+        
+        .feature-text p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: #f8fafc;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .service-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        .service-link i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .portfolio-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .tab-btn {
+            padding: 8px 20px;
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(37, 99, 235, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .portfolio-overlay p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 2px solid white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .portfolio-link:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: #f8fafc;
+        }
+        
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-item {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 0 20px;
+            display: none;
+        }
+        
+        .testimonial-item.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary);
+        }
+        
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-role {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-rating {
+            color: var(--secondary);
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            background-color: rgba(37, 99, 235, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h3 {
+            margin-bottom: 5px;
+        }
+        
+        .contact-text p, .contact-text a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+        
+        .contact-form {
+            background-color: #f8fafc;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-col p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-links i {
+            font-size: 0.8rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                text-align: center;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .portfolio-tabs {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="RR industry logo.png" alt="RR Industries Logo">
+                    <span class="logo-text">RR Industries</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <h1>Transform Your Business With <span>Stunning Websites</span></h1>
+                    <p>RR Industries delivers custom, responsive websites that drive results. From small businesses to large enterprises, we create digital experiences that captivate your audience.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary">Get Your Website</a>
+                        <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+                    </div>
+                </div>
+                <div class="hero-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Website Development">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>About RR Industries</h2>
+                <p>We are a team of passionate web developers dedicated to creating exceptional digital experiences that help businesses thrive online.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Ritesh Rathod - CEO">
+                </div>
+                <div class="about-text fade-in">
+                    <h3>Ritesh Rathod</h3>
+                    <p>As the founder and CEO of RR Industries, I bring a unique combination of technical expertise and creative vision to every project. With years of experience in web development, I understand what it takes to create websites that not only look great but also perform exceptionally.</p>
+                    <p>Our mission is to help businesses establish a powerful online presence through custom websites tailored to their specific needs and goals.</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Modern Design</h4>
+                                <p>Cutting-edge designs that impress</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Responsive</h4>
+                                <p>Perfect on all devices</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Fast Performance</h4>
+                                <p>Lightning-fast loading speeds</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Support</h4>
+                                <p>Dedicated ongoing assistance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive web development solutions tailored to your business requirements.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Business Websites">
+                    </div>
+                    <div class="service-content">
+                        <h3>Business Websites</h3>
+                        <p>Professional websites designed to showcase your business, attract customers, and generate leads with clean, modern designs.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="E-commerce Solutions">
+                    </div>
+                    <div class="service-content">
+                        <h3>E-commerce Solutions</h3>
+                        <p>Powerful online stores with secure payment gateways, product management, and mobile-friendly shopping experiences.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Custom Web Applications">
+                    </div>
+                    <div class="service-content">
+                        <h3>Custom Web Applications</h3>
+                        <p>Tailored solutions for your unique business needs, built with the latest technologies for optimal performance.</p>
+                        <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Portfolio</h2>
+                <p>Explore some of our recent projects and see the quality of our work.</p>
+            </div>
+            <div class="portfolio-tabs fade-in">
+                <button class="tab-btn active" data-filter="all">All</button>
+                <button class="tab-btn" data-filter="business">Business</button>
+                <button class="tab-btn" data-filter="ecommerce">E-commerce</button>
+                <button class="tab-btn" data-filter="custom">Custom</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in" data-category="business">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Lakudkar Gym Website">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Lakudkar Gym</h3>
+                        <p>A modern, responsive website for a fitness center with class schedules, membership options, and trainer profiles.</p>
+                        <a href="https://ritesh-rathod16.github.io/Lakudkar_gym11/" target="_blank" class="portfolio-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in" data-category="business">
+                    <div class="portfolio-image">
+                        <img src="https://i.pinimg.com/736x/8d/12/ce/8d12ce67105a5b8b111c0ba53c1058a9.jpg" alt="GPS Highway Restaurant">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>GPS Highway Restaurant</h3>
+                        <p>An elegant restaurant website featuring menu, reservation system, gallery, and contact information.</p>
+                        <a href="https://ritesh-rathod16.github.io/GPS_Highway_Restaurant/" target="_blank" class="portfolio-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in" data-category="ecommerce">
+                    <div class="portfolio-image">
+                        <img src="https://i.pinimg.com/736x/eb/3c/c0/eb3cc0abaa5f0e00bf261172d5ef2386.jpg" alt="Fashion Store">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Fashion E-commerce</h3>
+                        <p>An online clothing store with product filtering, cart functionality, and secure checkout.</p>
+                        <a href="#contact" class="portfolio-link">Learn More <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in" data-category="custom">
+                    <div class="portfolio-image">
+                        <img src="https://i.pinimg.com/736x/d9/4f/7d/d94f7dfd244b0b68d1d07f9b268293b2.jpg" alt="School Management System">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>School Management System</h3>
+                        <p>A comprehensive platform for schools to manage students, teachers, schedules, and communication.</p>
+                        <a href="#contact" class="portfolio-link">Learn More <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in" data-category="business">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Hotel Booking">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Hotel Booking Website</h3>
+                        <p>A luxurious hotel website with room booking system, amenities showcase, and local attraction guide.</p>
+                        <a href="#contact" class="portfolio-link">Learn More <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in" data-category="custom">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Healthcare Portal">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Healthcare Portal</h3>
+                        <p>A secure patient portal with appointment scheduling, medical records access, and telehealth features.</p>
+                        <a href="#contact" class="portfolio-link">Learn More <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>What Our Clients Say</h2>
+                <p>Hear from businesses that have transformed their online presence with our websites.</p>
+            </div>
+            <div class="testimonials-slider fade-in">
+                <div class="testimonial-item active">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="testimonial-avatar">
+                    <p class="testimonial-quote">"RR Industries built our gym website and it has significantly increased our membership sign-ups. The site is modern, easy to navigate, and looks great on all devices."</p>
+                    <h4 class="testimonial-author">Rajesh Lakudkar</h4>
+                    <p class="testimonial-role">Owner, Lakudkar Gym</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="testimonial-avatar">
+                    <p class="testimonial-quote">"The restaurant website RR Industries created for us has improved our online reservations by 40%. Customers love the easy-to-use interface and beautiful food gallery."</p>
+                    <h4 class="testimonial-author">Priya Sharma</h4>
+                    <p class="testimonial-role">Manager, GPS Highway Restaurant</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" class="testimonial-avatar">
+                    <p class="testimonial-quote">"As a school principal, I needed a functional website that could handle multiple users. RR Industries delivered beyond our expectations with their custom solution."</p>
+                    <h4 class="testimonial-author">Dr. Amit Patel</h4>
+                    <p class="testimonial-role">Principal, Sunshine International School</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <div class="slider-dot active" data-slide="0"></div>
+                    <div class="slider-dot" data-slide="1"></div>
+                    <div class="slider-dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Get In Touch</h2>
+                <p>Ready to start your project? Contact us today for a free consultation.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <a href="mailto:riteshrathod016@gmail.com">riteshrathod016@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Phone</h3>
+                            <a href="tel:+917721874530">+91 7721874530</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Location</h3>
+                            <p>Nagpur, Maharashtra, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Working Hours</h3>
+                            <p>Monday - Friday: 9am - 6pm</p>
+                            <p>Saturday: 10am - 4pm</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm" action="https://formspree.io/f/3ad2ac7d-5205-4c7f-b856-de35b9a592f3" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service" class="form-control">
+                                <option value="">Select a service</option>
+                                <option value="Business Website">Business Website</option>
+                                <option value="E-commerce Website">E-commerce Website</option>
+                                <option value="Custom Web Application">Custom Web Application</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <div class="logo">
+                        <img src="RR industry logo.png" alt="RR Industries Logo" style="height: 30px;">
+                        <span class="logo-text" style="color: white;">RR Industries</span>
+                    </div>
+                    <p>Creating exceptional digital experiences that help businesses thrive online.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/ritesh_rathod16"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/ritesh_rathod_official/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/ritesh-rathod-34a5a3329/"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Business Websites</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> E-commerce Solutions</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Custom Web Applications</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Website Maintenance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#portfolio"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" class="form-control" style="margin-bottom: 10px;">
+                        <button type="submit" class="submit-btn" style="width: auto;">Subscribe</button>
+                        <a href="news_letter.html">NewsLetter</a>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 RR Industries. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mobileMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Sticky Header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 0);
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            backToTop.classList.toggle('active', window.scrollY > 300);
+        });
+        
+        // Back to Top Button
+        document.querySelector('.back-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Testimonial Slider
+        const testimonialItems = document.querySelectorAll('.testimonial-item');
+        const sliderDots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            testimonialItems.forEach(item => item.classList.remove('active'));
+            sliderDots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonialItems[index].classList.add('active');
+            sliderDots[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        sliderDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+        
+        // Auto slide change
+        setInterval(() => {
+            let nextSlide = (currentSlide + 1) % testimonialItems.length;
+            showSlide(nextSlide);
+        }, 5000);
+        
+        // Portfolio Filter
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Scroll Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkScroll() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Check on load
+        window.addEventListener('load', checkScroll);
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+        
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const formAction = this.getAttribute('action');
+            
+            fetch(formAction, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                alert('There was a problem sending your message. Please try again later.');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
